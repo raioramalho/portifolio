@@ -1,14 +1,44 @@
-export default function Home() {
+import { headers } from "next/headers";
+
+async function getData() {
+  try {
+    const response = await fetch("https://cep.awesomeapi.com.br/json/20521100", {
+      headers: {
+        "Content-Type": "application/json",        
+      },
+      method: "GET",
+      next: {
+        revalidate: 30,
+        tags: ["cep"],
+      }
+    });
+    return response.json();
+  } catch (error) {
+    console.error("Error fetching CEP:", error);
+    return {};
+  }
+}
+
+export default async function Home() {
+  const cep = await getData();
+  console.log(cep);
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <div className="text-center sm:text-left">
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">Alan Ramalho</h1>
-          <h2 className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-6">Arquiteto de Soluções</h2>
+          <h2 className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-6">
+            Arquiteto de Soluções
+          </h2>
           <p className="text-lg text-gray-700 dark:text-gray-200 max-w-2xl">
-            Especialista em arquitetura de software e soluções tecnológicas, 
-            com foco em desenvolvimento de sistemas escaláveis e eficientes.
+            Especialista em arquitetura de software e soluções tecnológicas, com
+            foco em desenvolvimento de sistemas escaláveis e eficientes.
           </p>
+
+          <p>Address: {cep.address}</p>
+          <p>City: {cep.city}</p>
+          <p>State: {cep.state}</p>
         </div>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
