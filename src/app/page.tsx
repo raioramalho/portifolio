@@ -1,5 +1,4 @@
-import { headers } from "next/headers";
-
+'use server';
 async function getData() {
   try {
     const response = await fetch("https://cep.awesomeapi.com.br/json/20521100", {
