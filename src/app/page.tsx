@@ -1,93 +1,189 @@
-"use client";
-import { Suspense, useEffect, useState } from "react";
+'use client';
+// Componentes dinâmicos
+import Image from "next/image";
+import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useState } from "react";
+import CertificationCard from "./components/cert-card";
+
+// Dados dinâmicos (dentro de um arquivo, você pode importar ou manter em uma variável)
+const dados = {
+  nome: "Alan Ramalho",
+  descricao: "Transformando desafios técnicos em soluções escaláveis, eficientes e inovadoras",
+  sobreMim: {
+    objetivo: "Atuar como Arquiteto de Soluções liderando a transformação digital de empresas, com foco em nuvem, automação, observabilidade e eficiência. Busco alinhar tecnologia com estratégia de negócio, garantindo segurança, escalabilidade e economia em cada projeto.",
+    experiencia: "Tenho experiência prática com clusters Kubernetes, pipelines GitHub Actions, mensageria com Redis e Kafka, deploys multi-cloud e estratégias de observabilidade com Grafana & Prometheus. Já liderei projetos como migração de infra da AWS (us-east-1) para sa-east-1, criei frameworks internos de CI/CD e hoje lidero iniciativas técnicas com foco em escalabilidade, economia e inovação.",
+  },
+  competencias: {
+    linguagens: ['NestJS', 'Next.js', 'Java', 'TypeScript', 'JavaScript', 'Shell Script'],
+    devOps: ['GitHub Actions', 'GitLab CI', 'Docker & Kubernetes', 'Grafana', 'Prometheus', 'Linux'],
+    cloud: ['AWS', 'Oracle Cloud', 'Azure', 'Cloudflare', 'VMware'],
+    dados: ['PostgreSQL', 'Mysql', 'OracleDB', 'Redis', 'MongoDB', 'ElasticSearch', 'Kafka', 'Redis Pub/Sub']
+  },
+  certificacoes: [
+    { nome: "AWS Solutions Architect - Associate (em breve)", descricao: "Projetar soluções distribuídas e resilientes na AWS" },
+    { nome: "AZ-900 (em breve)", descricao: "Conceitos básicos de cloud e serviços da Microsoft Azure" },
+    { nome: "AWS Cloud Quest: Cloud Practitioner", descricao: "Fundamentos de serviços AWS com foco prático e gamificado" },
+    { nome: "Kubernetes Fundamentals (LFS158)", descricao: "Conceitos fundamentais e operação básica de clusters Kubernetes" },
+    { nome: "GitOps Fundamentals (LFS169)", descricao: "Aplicação de práticas GitOps em ambientes Kubernetes" },
+    { nome: "Linux Fundamentals (LFS101)", descricao: "Comandos, permissões e estrutura de diretórios Linux" },
+    { nome: "Cloud Infrastructure (LFS151)", descricao: "Introdução à infraestrutura de nuvem e serviços nativos" },
+    { nome: "OCI Foundations 2025 Certified", descricao: "Fundamentos da Oracle Cloud, com foco em infraestrutura e serviços principais" },
+    { nome: "AWS Architecting & Serverless (Knowledge)", descricao: "Conhecimentos essenciais para arquiteturas escaláveis na AWS" }
+  ],
+  links: {
+    linkedin: "https://www.linkedin.com/in/alan-silva-ramalho/",
+    github: "https://github.com/raioramalho",
+    email: "mailto:alan.ramalho.dev@gmail.com"
+  }
+};
+
+const SectionTitle = ({ title }: any) => (
+  <h2 className="text-3xl font-bold text-gray-800 mb-6">{title}</h2>
+);
+
+const CompetenciesCard = ({ title, list }: any) => (
+  <div className="p-6 border border-gray-200 rounded-lg shadow-lg cursor-pointer hover:shadow-2xl transition">
+    <h3 className="text-xl font-semibold text-teal-600 mb-3">{title}</h3>
+    <ul className="text-gray-700 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {list.map((item: string, index: Key) => (
+        <li key={index}>- {item}</li>
+      ))}
+    </ul>
+  </div>
+);
+
+
+const SoftSkillsCard = ({ title, skills }: any) => (
+  <div className="p-6 border border-gray-200 rounded-lg shadow-lg cursor-pointer hover:shadow-2xl transition">
+    <h3 className="text-xl font-semibold text-teal-600 mb-3">{title}</h3>
+    <ul className="text-gray-700">
+      {skills.map((skill: string, index: Key) => (
+        <li key={index}>- {skill}</li>
+      ))}
+    </ul>
+  </div>
+);
 
 export default function Home() {
-  const [cep, setCep] = useState<any>({});
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://cep.awesomeapi.com.br/json/05407002"
-        );
-        const data = await response.json();
-        console.log(data);
-        setCep(data);
-      } catch (error) {
-        console.error("Error fetching CEP:", error);
-      }
-    };
-    fetchData();
-  }, []);
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-        <main className="space-y-12">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 transform hover:scale-105 transition-all duration-300">
-            <div className="text-center sm:text-left">
-              <h1 className="text-5xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-6 animate-gradient">
-                Alan Ramalho
-              </h1>
-              <h2 className="text-2xl sm:text-3xl font-semibold text-gray-700 dark:text-gray-200 mb-8">
-                Arquiteto de Soluções
-              </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl leading-relaxed mb-8">
-                Especialista em arquitetura de software e soluções tecnológicas, com
-                foco em desenvolvimento de sistemas escaláveis e eficientes.
-              </p>
-              <div className="inline-flex items-center space-x-2 text-lg text-gray-600 dark:text-gray-300">
-                <span>Cidade:</span>
-                <Suspense fallback={<span className="animate-pulse">Carregando..</span>}>
-                  <span className="font-medium">{cep.city}</span>
-                </Suspense>
-              </div>
+    <div className="min-h-screen bg-gray-100 text-gray-800 font-sans">
+      {/* Header */}
+      <header className="bg-gradient-to-r from-gray-600 to-gray-800 text-white text-center py-12">
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-4">{dados.nome}</h1>
+        <p className="text-lg md:text-xl">{dados.descricao}</p>
+      </header>
+
+      {/* Main Content */}
+      <main className="max-w-6xl mx-auto p-6 grid gap-10">
+        {/* Objetivos */}
+        <section className="bg-white rounded-3xl shadow-lg p-8 hover:shadow-2xl transition">
+          <SectionTitle title="Objetivos Profissionais" />
+          <p className="text-gray-700 text-lg leading-relaxed">
+            {dados.sobreMim.objetivo}
+          </p>
+        </section>
+
+        {/* Sobre Mim */}
+        <div className="bg-white rounded-3xl shadow-lg p-8 flex flex-col md:flex-row items-center gap-8 hover:shadow-2xl transition">
+          <div className="flex-shrink-0">
+            <div className="w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden border-4 border-teal-500 relative">
+              <Image
+                src="https://avatars.githubusercontent.com/u/13089323?v=4"
+                alt="Foto de perfil do Alan"
+                layout="fill"
+                objectFit="cover"
+                priority
+              />
             </div>
           </div>
-
-          <div className="flex flex-col sm:flex-row gap-6 justify-center sm:justify-start">
-            <a
-              href="#contato"
-              className="px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium text-lg transition-all duration-300 hover:scale-110 hover:shadow-lg focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800"
-            >
-              Entre em Contato
-            </a>
-            <a
-              href="#portfolio"
-              className="px-8 py-4 rounded-full border-2 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-medium text-lg transition-all duration-300 hover:scale-110 hover:bg-gray-100 dark:hover:bg-gray-800 hover:shadow-lg focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700"
-            >
-              Ver Portfólio
-            </a>
+          <div>
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">Quem Sou</h2>
+            <p className="text-gray-700 text-lg leading-relaxed mb-4">
+              {dados.sobreMim.experiencia}
+            </p>
           </div>
-        </main>
+        </div>
 
-        <footer className="mt-24">
+        {/* Certificações */}
+        <section className="bg-white rounded-3xl shadow-lg p-8 hover:shadow-2xl transition">
+          <SectionTitle title="Certificações" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+            {dados.certificacoes.map((cert, index) => (
+              <CertificationCard title={cert.nome} description={cert.descricao} key={index}/>             
+            ))}
+          </div>
+        </section>
+
+        {/* Competências Técnicas */}
+        <section className="bg-white rounded-3xl shadow-lg p-8 hover:shadow-2xl transition">
+          <SectionTitle title="Competências Técnicas" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <CompetenciesCard
+              title="Linguagens & Frameworks"
+              list={dados.competencias.linguagens}
+            />
+            <CompetenciesCard
+              title="DevOps & Infraestrutura"
+              list={dados.competencias.devOps}
+            />
+            <CompetenciesCard
+              title="Cloud & Redes"
+              list={dados.competencias.cloud}
+            />
+            <CompetenciesCard
+              title="Dados & Mensageria"
+              list={dados.competencias.dados}
+            />
+          </div>          
+        </section>
+
+        {/* Competencias  sociais */}
+        <section className="bg-white rounded-3xl shadow-lg p-8 hover:shadow-2xl transition">
+          <SectionTitle title="Competências Sociais" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+            <SoftSkillsCard
+              title="Competências Interpessoais"
+              skills={["Comunicação clara", "Trabalho em equipe", "Empatia", "Resolução de conflitos", "Negociação"]}
+            />
+            <SoftSkillsCard
+              title="Gestão de Tempo"
+              skills={["Priorização de tarefas", "Gestão de prazos", "Organização"]}
+            />
+            <SoftSkillsCard
+              title="Liderança"
+              skills={["Gestão de equipes", "Mentoria", "Visão estratégica"]}
+            />
+          </div>
+        </section>
+
+        {/* Contato */}
+        <section className="bg-white rounded-3xl shadow-lg p-8 hover:shadow-2xl transition" id="contato">
+          <SectionTitle title="Contato" />
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <a
-              href="https://www.linkedin.com/in/alan-silva-ramalho/"
+              href={dados.links.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+              className="p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-gray-600 hover:text-blue-600"
             >
-              <span className="text-lg">LinkedIn</span>
+              <span className="text-lg font-medium">LinkedIn</span>
             </a>
             <a
-              href="https://github.com/raioramalho"
+              href={dados.links.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+              className="p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-gray-600 hover:text-gray-900"
             >
-              <span className="text-lg">GitHub</span>
+              <span className="text-lg font-medium">GitHub</span>
             </a>
             <a
-              href="mailto:ramalho.sit@gmail.com"
-              className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400"
+              href={dados.links.email}
+              className="p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-gray-600 hover:text-red-600"
             >
-              <span className="text-lg">Email</span>
+              <span className="text-lg font-medium">Email</span>
             </a>
           </div>
-        </footer>
-      </div>
+        </section>
+      </main>
     </div>
   );
 }
