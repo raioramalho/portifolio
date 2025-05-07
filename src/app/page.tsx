@@ -32,7 +32,7 @@ const dados = {
   links: {
     linkedin: "https://www.linkedin.com/in/alan-silva-ramalho/",
     github: "https://github.com/raioramalho",
-    email: "mailto:alan.ramalho.dev@gmail.com"
+    email: "mailto:ramalho.sit@hotmail.com"
   }
 };
 
