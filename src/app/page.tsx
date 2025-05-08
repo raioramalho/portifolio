@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useState } from "react";
 import CertificationCard from "./components/cert-card";
+import { Linkedin, Github, Mail } from 'lucide-react';
 
 // Dados dinâmicos (dentro de um arquivo, você pode importar ou manter em uma variável)
 const dados = {
@@ -13,22 +14,22 @@ const dados = {
     experiencia: "Tenho experiência prática com clusters Kubernetes, pipelines GitHub Actions, mensageria com Redis e Kafka, deploys multi-cloud e estratégias de observabilidade com Grafana & Prometheus. Já liderei projetos como migração de infra da AWS (us-east-1) para sa-east-1, criei frameworks internos de CI/CD e hoje lidero iniciativas técnicas com foco em escalabilidade, economia e inovação.",
   },
   competencias: {
-    linguagens: ['NestJS', 'Next.js', 'Java', 'TypeScript', 'JavaScript', 'Shell Script'],
-    devOps: ['GitHub Actions', 'GitLab CI', 'Docker & Kubernetes', 'Grafana', 'Prometheus', 'Linux'],
-    cloud: ['AWS', 'Oracle Cloud', 'Azure', 'Cloudflare', 'VMware'],
+    linguagens: ['NestJS', 'Next.js', 'Java', 'TypeScript', 'JavaScript', 'Python', 'Shell Script'],
+    devOps: ['GitHub Actions', 'Terraform', 'GitLab CI', 'Kubernetes & Docker', 'Grafana', 'Prometheus', 'Linux', 'Nginx'],
+    cloud: ['AWS', 'Oracle Cloud', 'Azure', 'GCP', 'Cloudflare', 'VMware'],
     dados: ['PostgreSQL', 'Mysql', 'OracleDB', 'Redis', 'MongoDB', 'ElasticSearch', 'Kafka', 'Redis Pub/Sub']
   },
   certificacoes: [
     { nome: "AWS Solutions Architect - Associate (em breve)", descricao: "Projetar soluções distribuídas e resilientes na AWS", imagem: "https://bucket.raiosystems.tech/aws-ssa.png" },
-    { nome: "AZ-900 (em breve)", descricao: "Conceitos básicos de cloud e serviços da Microsoft Azure", imagem: "https://bucket.raiosystems.tech/az-900.png"},
-    { nome: "TOGAF® 9 Foundation (em breve)", descricao: "Certificação que valida o conhecimento dos fundamentos do TOGAF 9, focando em arquitetura corporativa, seus princípios, estrutura e métodos.", imagem: "https://bucket.raiosystems.tech/togaf-9-f.png"},
-    { nome: "AWS Cloud Quest: Cloud Practitioner", descricao: "Fundamentos de serviços AWS com foco prático e gamificado", imagem:"https://bucket.raiosystems.tech/cloudquest.png" },
+    { nome: "AZ-900 (em breve)", descricao: "Conceitos básicos de cloud e serviços da Microsoft Azure", imagem: "https://bucket.raiosystems.tech/az-900.png" },
+    { nome: "TOGAF® 9 Foundation (em breve)", descricao: "Certificação que valida o conhecimento dos fundamentos do TOGAF 9, focando em arquitetura corporativa, seus princípios, estrutura e métodos.", imagem: "https://bucket.raiosystems.tech/togaf-9-f.png" },
+    { nome: "AWS Cloud Quest: Cloud Practitioner", descricao: "Fundamentos de serviços AWS com foco prático e gamificado", imagem: "https://bucket.raiosystems.tech/cloudquest.png" },
+    { nome: "OCI Foundations 2025 Certified", descricao: "Fundamentos da Oracle Cloud, com foco em infraestrutura e serviços principais", imagem: "https://bucket.raiosystems.tech/oci.png" },
+    { nome: "AWS Architecting & Serverless (Knowledge)", descricao: "Conhecimentos essenciais para arquiteturas escaláveis na AWS", imagem: "https://bucket.raiosystems.tech/know-arch.png" },
     { nome: "Introduction to Kubernetes (LFS158)", descricao: "Conceitos fundamentais e operação básica de clusters Kubernetes", imagem: "https://bucket.raiosystems.tech/lfs158.png" },
-    { nome: "GitOps Fundamentals (LFS169)", descricao: "Aplicação de práticas GitOps em ambientes Kubernetes",  imagem: "https://bucket.raiosystems.tech/lfs169.png" },
+    { nome: "GitOps Fundamentals (LFS169)", descricao: "Aplicação de práticas GitOps em ambientes Kubernetes", imagem: "https://bucket.raiosystems.tech/lfs169.png" },
+    { nome: "Cloud Infrastructure (LFS151)", descricao: "Introdução à infraestrutura de nuvem e serviços nativos", imagem: "https://bucket.raiosystems.tech/lfs151.png" },
     // { nome: "Linux Fundamentals (LFS101)", descricao: "Comandos, permissões e estrutura de diretórios Linux",  imagem: "https://bucket.raiosystems.tech/lfs101.png" },
-    { nome: "Cloud Infrastructure (LFS151)", descricao: "Introdução à infraestrutura de nuvem e serviços nativos",  imagem: "https://bucket.raiosystems.tech/lfs151.png" },
-    { nome: "OCI Foundations 2025 Certified", descricao: "Fundamentos da Oracle Cloud, com foco em infraestrutura e serviços principais",  imagem: "https://bucket.raiosystems.tech/oci.png" },
-    { nome: "AWS Architecting & Serverless (Knowledge)", descricao: "Conhecimentos essenciais para arquiteturas escaláveis na AWS", imagem: "https://bucket.raiosystems.tech/know-arch.png"  },    
   ],
   links: {
     linkedin: "https://www.linkedin.com/in/alan-silva-ramalho/",
@@ -109,7 +110,7 @@ export default function Home() {
           <SectionTitle title="Certificações" />
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
             {dados.certificacoes.map((cert, index) => (
-              <CertificationCard title={cert.nome} imagem={cert.imagem} description={cert.descricao} key={index}/>             
+              <CertificationCard title={cert.nome} imagem={cert.imagem} description={cert.descricao} key={index} />
             ))}
           </div>
         </section>
@@ -134,7 +135,7 @@ export default function Home() {
               title="Dados & Mensageria"
               list={dados.competencias.dados}
             />
-          </div>          
+          </div>
         </section>
 
         {/* Competencias  sociais */}
@@ -164,25 +165,29 @@ export default function Home() {
               href={dados.links.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-gray-600 hover:text-blue-600"
+              className="p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-gray-600 hover:text-blue-600 hover:bg-blue-100"
             >
+              <Linkedin className="w-5 h-5" />
               <span className="text-lg font-medium">LinkedIn</span>
             </a>
             <a
               href={dados.links.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-gray-600 hover:text-gray-900"
+              className="p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100"
             >
+              <Github className="w-5 h-5" />
               <span className="text-lg font-medium">GitHub</span>
             </a>
             <a
-              href={dados.links.email}
-              className="p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-gray-600 hover:text-red-600"
+              href={`mailto:${dados.links.email}`}
+              className="p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-gray-600 hover:text-red-600 hover:bg-red-100"
             >
+              <Mail className="w-5 h-5" />
               <span className="text-lg font-medium">Email</span>
             </a>
           </div>
+
         </section>
       </main>
     </div>
