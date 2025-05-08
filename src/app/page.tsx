@@ -10,8 +10,8 @@ const dados = {
   nome: "Alan Ramalho",
   descricao: "Transformando desafios técnicos em soluções escaláveis, eficientes e inovadoras",
   sobreMim: {
-    objetivo: "Atuar como Arquiteto de Soluções liderando a transformação digital de empresas, com foco em nuvem, automação, observabilidade e eficiência. Busco alinhar tecnologia com estratégia de negócio, garantindo segurança, escalabilidade e economia em cada projeto.",
-    experiencia: "Tenho experiência prática com clusters Kubernetes, pipelines GitHub Actions, mensageria com Redis e Kafka, deploys multi-cloud e estratégias de observabilidade com Grafana & Prometheus. Já liderei projetos como migração de infra da AWS (us-east-1) para sa-east-1, criei frameworks internos de CI/CD e hoje lidero iniciativas técnicas com foco em escalabilidade, economia e inovação.",
+    objetivo: "Busco evoluir como de Arquiteto de Soluções, aplicando meu conhecimento técnico na definição de estratégias de infraestrutura e arquitetura de software. Estou comprometido em otimizar custos e promover inovação nos projetos, sempre alinhado a requisitos de desempenho e segurança. Meu foco em automação e em melhores práticas de desenvolvimento contribui diretamente para resultados consistentes e de alta qualidade em projetos de grande porte.",
+    experiencia: "Sou o Alan — desenvolvedor e profissional de DevOps apaixonado por criar soluções escaláveis, eficientes e modernas. Tenho experiência sólida com Linux, Git, CI/CD, NestJS e Kubernetes, sempre buscando aplicar automação e boas práticas para entregar resultados robustos. Meu objetivo é atuar como Arquiteto de Soluções, unindo visão técnica com foco em inovação e economia. Fora da tecnologia, gosto de correr para clarear a mente e criar música como forma de expressão. Acredito no equilíbrio entre lógica e criatividade, tanto no código quanto na vida.",
   },
   competencias: {
     linguagens: ['NestJS', 'Next.js', 'Java', 'TypeScript', 'JavaScript', 'Python', 'Shell Script'],
@@ -144,11 +144,11 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
             <SoftSkillsCard
               title="Competências Interpessoais"
-              skills={["Comunicação clara", "Trabalho em equipe", "Empatia", "Resolução de conflitos", "Negociação"]}
+              skills={["Trabalho em equipe", "Empatia", "Resolução de conflitos", "Negociação"]}
             />
             <SoftSkillsCard
               title="Gestão de Tempo"
-              skills={["Priorização de tarefas", "Gestão de prazos", "Organização"]}
+              skills={["Organização"]}
             />
             <SoftSkillsCard
               title="Liderança"
