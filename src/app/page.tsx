@@ -19,15 +19,16 @@ const dados = {
     dados: ['PostgreSQL', 'Mysql', 'OracleDB', 'Redis', 'MongoDB', 'ElasticSearch', 'Kafka', 'Redis Pub/Sub']
   },
   certificacoes: [
-    { nome: "AWS Solutions Architect - Associate (em breve)", descricao: "Projetar soluções distribuídas e resilientes na AWS" },
-    { nome: "AZ-900 (em breve)", descricao: "Conceitos básicos de cloud e serviços da Microsoft Azure" },
-    { nome: "AWS Cloud Quest: Cloud Practitioner", descricao: "Fundamentos de serviços AWS com foco prático e gamificado" },
-    { nome: "Kubernetes Fundamentals (LFS158)", descricao: "Conceitos fundamentais e operação básica de clusters Kubernetes" },
-    { nome: "GitOps Fundamentals (LFS169)", descricao: "Aplicação de práticas GitOps em ambientes Kubernetes" },
-    { nome: "Linux Fundamentals (LFS101)", descricao: "Comandos, permissões e estrutura de diretórios Linux" },
-    { nome: "Cloud Infrastructure (LFS151)", descricao: "Introdução à infraestrutura de nuvem e serviços nativos" },
-    { nome: "OCI Foundations 2025 Certified", descricao: "Fundamentos da Oracle Cloud, com foco em infraestrutura e serviços principais" },
-    { nome: "AWS Architecting & Serverless (Knowledge)", descricao: "Conhecimentos essenciais para arquiteturas escaláveis na AWS" }
+    { nome: "AWS Solutions Architect - Associate (em breve)", descricao: "Projetar soluções distribuídas e resilientes na AWS", imagem: "https://bucket.raiosystems.tech/aws-ssa.png" },
+    { nome: "AZ-900 (em breve)", descricao: "Conceitos básicos de cloud e serviços da Microsoft Azure", imagem: "https://bucket.raiosystems.tech/az-900.png"},
+    { nome: "TOGAF® 9 Foundation (em breve)", descricao: "Certificação que valida o conhecimento dos fundamentos do TOGAF 9, focando em arquitetura corporativa, seus princípios, estrutura e métodos.", imagem: "https://bucket.raiosystems.tech/togaf-9-f.png"},
+    { nome: "AWS Cloud Quest: Cloud Practitioner", descricao: "Fundamentos de serviços AWS com foco prático e gamificado", imagem:"https://bucket.raiosystems.tech/cloudquest.png" },
+    { nome: "Introduction to Kubernetes (LFS158)", descricao: "Conceitos fundamentais e operação básica de clusters Kubernetes", imagem: "https://bucket.raiosystems.tech/lfs158.png" },
+    { nome: "GitOps Fundamentals (LFS169)", descricao: "Aplicação de práticas GitOps em ambientes Kubernetes",  imagem: "https://bucket.raiosystems.tech/lfs169.png" },
+    // { nome: "Linux Fundamentals (LFS101)", descricao: "Comandos, permissões e estrutura de diretórios Linux",  imagem: "https://bucket.raiosystems.tech/lfs101.png" },
+    { nome: "Cloud Infrastructure (LFS151)", descricao: "Introdução à infraestrutura de nuvem e serviços nativos",  imagem: "https://bucket.raiosystems.tech/lfs151.png" },
+    { nome: "OCI Foundations 2025 Certified", descricao: "Fundamentos da Oracle Cloud, com foco em infraestrutura e serviços principais",  imagem: "https://bucket.raiosystems.tech/oci.png" },
+    { nome: "AWS Architecting & Serverless (Knowledge)", descricao: "Conhecimentos essenciais para arquiteturas escaláveis na AWS", imagem: "https://bucket.raiosystems.tech/know-arch.png"  },    
   ],
   links: {
     linkedin: "https://www.linkedin.com/in/alan-silva-ramalho/",
@@ -108,7 +109,7 @@ export default function Home() {
           <SectionTitle title="Certificações" />
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
             {dados.certificacoes.map((cert, index) => (
-              <CertificationCard title={cert.nome} description={cert.descricao} key={index}/>             
+              <CertificationCard title={cert.nome} imagem={cert.imagem} description={cert.descricao} key={index}/>             
             ))}
           </div>
         </section>

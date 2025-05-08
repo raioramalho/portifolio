@@ -21,6 +21,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'cloud.raiosystems.tech',
       },
+      {
+        protocol: 'https',
+        hostname: 'bucket.raiosystems.tech',
+      }
+      
     ],
   },
 };

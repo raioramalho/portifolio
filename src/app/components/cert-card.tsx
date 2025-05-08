@@ -1,13 +1,14 @@
+import Image from 'next/image';
 import { useState } from 'react';
 
 interface CertificationCardProps {
   title: string;
   description: string;
-  icon?: string;
+  imagem?: string;
   link?: string;
 }
 
-export default function CertificationCard({ title, description, icon, link }: CertificationCardProps) {
+export default function CertificationCard({ title, description, imagem, link }: CertificationCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -21,12 +22,12 @@ export default function CertificationCard({ title, description, icon, link }: Ce
       style={{ cursor: link ? 'pointer' : 'default' }}
     >
       <div className="flex items-start">
-        {icon && (
+        {imagem && (
           <div className="mr-4">
-            <div className={`w-10 h-10 flex items-center justify-center rounded-full ${
+            <div className={`w-100 h-100 flex items-center justify-center rounded-full ${
               isHovered ? 'bg-teal-500 text-white' : 'bg-teal-100 text-teal-500'
             } transition-colors duration-300`}>
-              {icon}
+              <Image src={imagem} alt={title} width={300} height={300}/>
             </div>
           </div>
         )}
